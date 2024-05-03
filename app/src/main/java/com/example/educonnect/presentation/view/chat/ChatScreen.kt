@@ -112,7 +112,7 @@ fun ChatScreen(){
                 .padding(paddingValues)
         ) {
             LazyColumn {
-                items(10){
+                items(2){
                     Row(
                         modifier = Modifier.fillMaxWidth(1f),
                         horizontalArrangement = when(it){
