@@ -3,6 +3,7 @@ package com.example.educonnect.presentation.view.auth
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -23,15 +24,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.example.educonnect.navigation.NavigationScreenNames
 import com.example.educonnect.presentation.view.util.CustomTextField
 import com.example.educonnect.ui.theme.Sky
 
 
 @Composable
-fun ForgotPass(){
+fun ForgotPass(navHostController: NavHostController){
+
     var id by remember { mutableStateOf("") }
+    var verification by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
@@ -60,29 +67,38 @@ fun ForgotPass(){
             }
         }
     ) {
-            it ->
+        it ->
         Column(
             modifier = Modifier
                 .padding(it)
                 .fillMaxWidth(1f)
                 .fillMaxHeight(1f)
                 .background(color = Sky),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Text(
+                modifier = Modifier.padding(top = 10.dp),
+                text = if(verification){"Verification code"}else{"Find your Account"},
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.titleMedium)
             Column(
                 modifier = Modifier
-                    .padding(start = 20.dp, end = 20.dp, top = 20.dp)
+                    .padding(start = 20.dp, end = 20.dp, top = 10.dp)
                     .fillMaxWidth(1f)
                     .background(
                         color = Color.White.copy(alpha = 0.3f),
                         shape = RoundedCornerShape(20.dp)
                     )
             ) {
-
                 Column(
                     modifier = Modifier.padding(15.dp)
                 ) {
                     Text(
-                        text = "Enter your ID",
+                        modifier = Modifier.padding(bottom = 5.dp),
+                        text = if(verification){"Enter the 6 digit verification code that we sent to "}else{"Enter your ID"},
                         color = Color.White,
                         fontWeight = FontWeight.Bold,
                         style = MaterialTheme.typography.titleMedium
@@ -91,7 +107,7 @@ fun ForgotPass(){
                         modifier = Modifier.height(40.dp),
                         value = id,
                         onValueChange = { id = it },
-                        placeholderText = "Enter your  ID",
+                        placeholderText = "Enter your verification code",
                         placeholderColor = Sky
                     )
 
@@ -101,20 +117,41 @@ fun ForgotPass(){
 
             Column(
                 modifier = Modifier
-                    .fillMaxWidth(1f)
-                    .padding(top = 15.dp),
-                verticalArrangement = Arrangement.Center,
+                    .fillMaxWidth(1f),
+                verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+
+                Spacer(modifier = Modifier.height(20.dp))
+
                 Button(
                     modifier = Modifier
                         .height(40.dp)
                         .width(200.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.White) ,
-                    onClick = { /*TODO*/ }
+                    onClick = { verification = !verification }
                 ) {
                     Text(
                         text = "Next",
+                        color = Sky,
+                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                Button(
+                    modifier = Modifier
+                        .height(40.dp)
+                        .width(220.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.White) ,
+                    onClick = {
+                        navHostController.navigate(NavigationScreenNames.Login.route)
+                    }
+                ) {
+                    Text(
+                        text = "Return back to login",
                         color = Sky,
                         fontWeight = FontWeight.Bold,
                         style = MaterialTheme.typography.titleMedium
@@ -128,5 +165,5 @@ fun ForgotPass(){
 @Preview
 @Composable
 private fun ForgotPassPreview(){
-    ForgotPass()
+    ForgotPass(navHostController = rememberNavController())
 }

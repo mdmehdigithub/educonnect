@@ -1,7 +1,6 @@
 package com.example.educonnect.presentation.view.auth
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -33,11 +32,10 @@ import com.example.educonnect.navigation.NavigationScreenNames
 import com.example.educonnect.presentation.view.util.CustomTextField
 import com.example.educonnect.ui.theme.Sky
 
-private const val STUDENT = "Student"
-private const val TEACHER = "Teacher"
 @Composable
-fun Login(navHostController: NavHostController){
-    var type by remember { mutableStateOf(STUDENT) }
+fun SignIn(navHostController: NavHostController){
+
+    var name by remember { mutableStateOf("") }
     var id by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -60,7 +58,7 @@ fun Login(navHostController: NavHostController){
                 )
 
                 Text(
-                    text =  "Log in as $type",
+                    text =  "Sign in",
                     fontWeight = FontWeight.Bold,
                     color = Color.White,
                     style = MaterialTheme.typography.headlineSmall
@@ -68,7 +66,7 @@ fun Login(navHostController: NavHostController){
             }
         }
     ) {
-        it ->
+            it ->
         Column(
             modifier = Modifier
                 .padding(it)
@@ -90,7 +88,24 @@ fun Login(navHostController: NavHostController){
                     modifier = Modifier.padding(15.dp)
                 ) {
                     Text(
-                        text = "$type ID",
+                        text = "Name",
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                    CustomTextField(
+                        modifier = Modifier.height(40.dp),
+                        value = name,
+                        onValueChange = { name = it },
+                        placeholderText = "Enter your name",
+                        fontColor = Sky,
+                        placeholderColor = Sky
+                    )
+
+                    Spacer(modifier = Modifier.padding(top = 15.dp ))
+
+                    Text(
+                        text = "Student ID",
                         color = Color.White,
                         fontWeight = FontWeight.Bold,
                         style = MaterialTheme.typography.titleMedium
@@ -99,9 +114,9 @@ fun Login(navHostController: NavHostController){
                         modifier = Modifier.height(40.dp),
                         value = id,
                         onValueChange = { id = it },
-                        placeholderText = "Enter your $type ID",
+                        placeholderText = "Enter your student ID number",
                         fontColor = Sky,
-                        placeholderColor = Sky
+                        placeholderColor = Sky,
                     )
 
                     Spacer(modifier = Modifier.padding(top = 15.dp ))
@@ -116,22 +131,12 @@ fun Login(navHostController: NavHostController){
                         modifier = Modifier.height(40.dp),
                         value = password,
                         onValueChange = { password = it },
-                        placeholderText = "Enter password",
+                        placeholderText = "Enter a password",
                         fontColor = Sky,
-                        placeholderColor = Sky,
+                        placeholderColor = Sky
                     )
 
-                    Text(
-                        modifier = Modifier
-                            .padding(top = 10.dp)
-                            .clickable(onClick = {
-                                navHostController.navigate(NavigationScreenNames.ForgotPassword.route)
-                            }),
-                        text = "Forgot Password ?",
-                        color = Color.White,
-                        fontWeight = FontWeight.Bold,
-                        style = MaterialTheme.typography.titleMedium
-                    )
+                    Spacer(modifier = Modifier.padding(top = 15.dp ))
 
                 }
 
@@ -140,97 +145,62 @@ fun Login(navHostController: NavHostController){
             Column(
                 modifier = Modifier
                     .fillMaxWidth(1f)
-                    .padding(top = 15.dp),
+                    .fillMaxHeight(),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-
                 Column(
-                    modifier = Modifier
-                        .fillMaxWidth(1f)
-                        .fillMaxHeight(),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    modifier = Modifier.weight(0.7f)
                 ) {
-                    Column(
-                        modifier = Modifier.weight(0.7f),
-                        verticalArrangement = Arrangement.Top,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-
-                        Button(
-                            modifier = Modifier
-                                .height(40.dp)
-                                .width(200.dp),
-                            colors = ButtonDefaults.buttonColors(containerColor = Color.White) ,
-                            onClick = {
-                                navHostController.navigate(NavigationScreenNames.MainScreens.route){
-                                    popUpTo(route = NavigationScreenNames.Login.route){
-                                        inclusive = true
-                                    }
+                    Button(
+                        modifier = Modifier
+                            .padding(top = 15.dp)
+                            .height(40.dp)
+                            .width(200.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = Color.White) ,
+                        onClick = {
+                            navHostController.navigate(NavigationScreenNames.MainScreens.route){
+                                popUpTo(route = NavigationScreenNames.Login.route){
+                                    inclusive = true
                                 }
                             }
-                        ) {
-                            Text(
-                                text = "Log in",
-                                color = Sky,
-                                fontWeight = FontWeight.Bold,
-                                style = MaterialTheme.typography.titleMedium
-                            )
                         }
-
-                        Spacer(modifier = Modifier.padding(top = 15.dp))
-
-                        Button(
-                            modifier = Modifier
-                                .height(40.dp)
-                                .width(200.dp),
-                            colors = ButtonDefaults.buttonColors(containerColor = Color.White) ,
-                            onClick = {
-                                when(type){
-                                    TEACHER -> type = STUDENT
-                                    STUDENT -> type = TEACHER
-                                }
-                            }
-                        ) {
-                            Text(
-                                text = "Switch to " + if(type == TEACHER){STUDENT}else{TEACHER},
-                                color = Sky,
-                                fontWeight = FontWeight.Bold,
-                                style = MaterialTheme.typography.titleMedium
-                            )
-                        }
-                    }
-
-
-                    Column(
-                        modifier = Modifier.weight(0.3f),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
-                            text = "Don't have an account ?",
-                            color = Color.White,
+                            text = "Sign in",
+                            color = Sky,
                             fontWeight = FontWeight.Bold,
                             style = MaterialTheme.typography.titleMedium
                         )
-                        Button(
-                            modifier = Modifier
-                                .padding(top = 10.dp)
-                                .height(40.dp)
-                                .width(200.dp),
-                            colors = ButtonDefaults.buttonColors(containerColor = Color.White) ,
-                            onClick = {
-                                navHostController.navigate(NavigationScreenNames.SignIn.route)
-                            }
-                        ) {
-                            Text(
-                                text = "Sign in",
-                                color = Sky,
-                                fontWeight = FontWeight.Bold,
-                                style = MaterialTheme.typography.titleMedium
-                            )
+                    }
+                }
+
+
+                Column(
+                    modifier = Modifier.weight(0.3f)
+                ) {
+                    Text(
+                        text = "Already have an account ?",
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                    Button(
+                        modifier = Modifier
+                            .padding(top = 10.dp)
+                            .height(40.dp)
+                            .width(200.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = Color.White) ,
+                        onClick = {
+                            navHostController.navigate(NavigationScreenNames.Login.route)
                         }
+                    ) {
+                        Text(
+                            text = "Log in",
+                            color = Sky,
+                            fontWeight = FontWeight.Bold,
+                            style = MaterialTheme.typography.titleMedium
+                        )
                     }
                 }
             }
@@ -240,6 +210,6 @@ fun Login(navHostController: NavHostController){
 
 @Preview
 @Composable
-private fun LoginPreview(){
-    Login(navHostController = rememberNavController())
+private fun SignInPreview(){
+    SignIn(navHostController = rememberNavController())
 }
