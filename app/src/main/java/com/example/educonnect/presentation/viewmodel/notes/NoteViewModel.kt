@@ -1,4 +1,4 @@
-package com.example.educonnect.presentation.viewmodel
+package com.example.educonnect.presentation.viewmodel.notes
 
 import androidx.lifecycle.ViewModel
 

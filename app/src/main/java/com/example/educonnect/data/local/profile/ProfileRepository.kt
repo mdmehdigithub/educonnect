@@ -1,4 +1,4 @@
-package com.example.educonnect.data.profile
+package com.example.educonnect.data.local.profile
 
 
 import com.example.educonnect.model.StudentProfile

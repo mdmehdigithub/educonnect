@@ -4,6 +4,8 @@ plugins {
 
     // Kotlin Symbol Processor
     id("com.google.devtools.ksp")
+    // Hilt
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -83,6 +85,15 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
     implementation("androidx.hilt:hilt-work:1.2.0")
     implementation("androidx.work:work-runtime-ktx:2.9.0")
+
+    // GSON
+    implementation("com.google.code.gson:gson:2.10.1")
+
+    // Preference
+    implementation("androidx.preference:preference-ktx:1.2.1")
+
+    // Volley
+    implementation("com.android.volley:volley:1.2.1")
 
 
 }

@@ -8,7 +8,12 @@ data class StudentProfile(
     @PrimaryKey
     val studentID: String,
     val name: String,
-    val password: String
+    val password: String,
+)
+
+data class StudentAccessibility(
+    val studentID: String,
+    val classes: ArrayList<String>
 )
 
 @Entity(tableName = "teacher_profile")
@@ -16,5 +21,10 @@ data class TeacherProfile(
     @PrimaryKey
     val teacherID: String,
     val name: String,
-    val password: String
+    val password: String,
+)
+
+data class TeacherAccessibility(
+    val studentID: String,
+    val classes: ArrayList<String>
 )
