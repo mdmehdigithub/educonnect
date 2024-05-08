@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FloatingActionButton
@@ -27,8 +28,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.educonnect.R
+import com.example.educonnect.navigation.NavigationScreenNames
 import com.example.educonnect.presentation.view.util.BottomBar
+import com.example.educonnect.presentation.view.util.TopBar
+import com.example.educonnect.presentation.viewmodel.notes.NoteViewModel
 import com.example.educonnect.ui.theme.Sky
 
 //-------------- Test Data -------------------------
@@ -44,10 +50,13 @@ val subjectlist  = listOf<Subject>(
 //-------------- Test Data -------------------------
 
 @Composable
-fun SubjectList(){
+fun SubjectList(
+    noteViewModel: NoteViewModel,
+    navHostController: NavHostController
+){
     Scaffold(
-        bottomBar = {
-            BottomBar()
+        topBar ={
+          TopBar()
         },
         floatingActionButton = {
             FloatingActionButton(
@@ -71,11 +80,16 @@ fun SubjectList(){
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally)
         {
-            items(subjectlist) {
+            itemsIndexed(subjectlist) {
+                index, it ->
+
                 SubjectCard(
                     title = it.title,
                     courseCode = it.courseCode,
-                    onClick = { /*TODO*/ })
+                    onClick = {
+                        noteViewModel.getIndex(index)
+                        navHostController.navigate(NavigationScreenNames.NotesList.route)
+                    })
             }
         }
     }
@@ -126,5 +140,5 @@ private fun SubjectCardPreview(){
 @Preview
 @Composable
 private fun SubjectListPreview(){
-    SubjectList()
+    SubjectList(NoteViewModel(), rememberNavController())
 }

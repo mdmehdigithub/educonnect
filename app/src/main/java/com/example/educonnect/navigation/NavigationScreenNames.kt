@@ -10,7 +10,10 @@ sealed class NavigationScreenNames(val route: String) {
     data object ForgotPassword: NavigationScreenNames("forgot_password")
 
     //---------------------- Main screen Nav -----------------------------
+    data object ChatList: NavigationScreenNames("chat_list")
     data object Chat: NavigationScreenNames("chat")
+    data object Subject: NavigationScreenNames("subject")
+    data object NotesList: NavigationScreenNames("notes_list")
     data object Notes: NavigationScreenNames("notes")
     data object Profile: NavigationScreenNames("profile")
 

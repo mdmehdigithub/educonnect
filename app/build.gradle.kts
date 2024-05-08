@@ -6,6 +6,9 @@ plugins {
     id("com.google.devtools.ksp")
     // Hilt
     id("com.google.dagger.hilt.android")
+    // Firebase
+    id("com.google.gms.google-services")
+
 }
 
 android {
@@ -94,6 +97,15 @@ dependencies {
 
     // Volley
     implementation("com.android.volley:volley:1.2.1")
+
+    //Firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-firestore")
+
+    //Coil
+    implementation("io.coil-kt:coil-compose:2.6.0")
 
 
 }

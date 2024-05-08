@@ -2,6 +2,7 @@ package com.example.educonnect.presentation.view.chat
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,10 +31,12 @@ fun ChatCard(
     modifier: Modifier = Modifier,
     name: String = "Name of the person",
     numOfText: Int = 0,
-    imageID: Int = R.drawable.person2
+    imageID: Int = R.drawable.person2,
+    onClick: () -> Unit
 ){
     Row(
         modifier = modifier
+            .clickable(onClick = onClick)
             .fillMaxWidth(1f)
             .height(100.dp)
             .background(color = Color.White, shape = RoundedCornerShape(16.dp))
@@ -114,5 +117,5 @@ fun ChatCard(
 @Preview
 @Composable
 private fun ChatCardPreview(){
-    ChatCard()
+    ChatCard(onClick = {})
 }

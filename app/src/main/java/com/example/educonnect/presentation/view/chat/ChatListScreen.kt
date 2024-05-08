@@ -23,16 +23,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.educonnect.R
-import com.example.educonnect.presentation.view.util.BottomBar
+import com.example.educonnect.navigation.NavigationScreenNames
+import com.example.educonnect.presentation.viewmodel.notes.ChatViewModel
 import com.example.educonnect.ui.theme.Sky
 
 @Composable
-fun ChatListScreen(){
+fun ChatListScreen(
+    chatViewModel: ChatViewModel,
+    navHostController: NavHostController
+){
     Scaffold(
-        bottomBar = {
-                    BottomBar()
-        },
         topBar = {
             Row(
                 modifier = Modifier
@@ -93,7 +96,11 @@ fun ChatListScreen(){
                     modifier = Modifier.padding(top = 10.dp, start = 10.dp, end = 10.dp),
                     name = it.name,
                     numOfText = it.numText,
-                    imageID = it.photo
+                    imageID = it.photo,
+                    onClick = {
+                        chatViewModel.getInfo(it.photo, it.name)
+                        navHostController.navigate(NavigationScreenNames.Chat.route)
+                    }
                 )
             }
         }
@@ -101,9 +108,9 @@ fun ChatListScreen(){
 }
 
 data class ChatListScreenModel(
-    val photo: Int,
-    val name: String,
-    val numText: Int
+    val photo: Int = 0,
+    val name: String = "",
+    val numText: Int = 0
 )
 
 val listOfContact = listOf<ChatListScreenModel>(
@@ -127,5 +134,8 @@ val listOfContact = listOf<ChatListScreenModel>(
 @Preview
 @Composable
 fun ChatListScreenPreview(){
-    ChatListScreen()
+    ChatListScreen(
+        chatViewModel = ChatViewModel(),
+        navHostController = rememberNavController()
+    )
 }

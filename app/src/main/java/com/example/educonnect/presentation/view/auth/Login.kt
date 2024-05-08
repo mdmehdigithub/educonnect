@@ -166,8 +166,6 @@ fun Login(navHostController: NavHostController){
                             colors = ButtonDefaults.buttonColors(containerColor = Color.White) ,
                             onClick = {
 
-                                
-
 
                                 navHostController.navigate(NavigationScreenNames.MainScreens.route){
                                     popUpTo(route = NavigationScreenNames.Login.route){

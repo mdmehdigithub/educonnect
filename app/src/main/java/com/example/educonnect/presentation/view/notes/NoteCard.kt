@@ -47,7 +47,6 @@ fun NoteCard(
 
     Card(
         modifier = modifier
-            .clickable(onClick = onClick)
             .padding(top = 15.dp)
             .width(300.dp)
             .height(
@@ -138,7 +137,7 @@ fun NoteCard(
                     verticalAlignment = Alignment.CenterVertically
                 )  {
                     Icon(
-                        modifier = Modifier.padding(end = 12.dp),
+                        modifier = Modifier.padding(end = 12.dp).clickable(onClick = onClick),
                         painter = painterResource(id = R.drawable.download_icn),
                         contentDescription = null)
                 }

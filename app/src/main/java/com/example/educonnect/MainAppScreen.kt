@@ -15,7 +15,11 @@ import com.example.educonnect.presentation.view.util.BottomBar
 
 @Composable
 fun MainAppScreen(navHostController: NavHostController = rememberNavController()){
-    Scaffold ()
+    Scaffold (
+        bottomBar = {
+            BottomBar(navHostController)
+        }
+    )
     { innerPadding ->
         Column(
             modifier = Modifier
