@@ -2,6 +2,7 @@ package com.example.educonnect.presentation.view.notes
 
 
 import android.speech.tts.TextToSpeech
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -32,6 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.educonnect.R
 import com.example.educonnect.ui.theme.EduConnectTheme
+import com.example.educonnect.ui.theme.Sky
 
 @Composable
 fun NoteCard(
@@ -50,7 +52,7 @@ fun NoteCard(
             .width(300.dp)
             .height(
                 if (extra) {
-                    80.dp
+                    100.dp
                 } else {
                     60.dp
                 }
@@ -88,10 +90,9 @@ fun NoteCard(
                 horizontalArrangement = Arrangement.Start
             ) {
                 Text(
-                    modifier = Modifier.padding(start = 15.dp),
                     text = title,
                     fontWeight = FontWeight.Bold,
-                    style = MaterialTheme.typography.headlineSmall
+                    style = MaterialTheme.typography.titleMedium
                 )
             }
 
@@ -116,11 +117,36 @@ fun NoteCard(
             }
         }
         if(extra){
-            Text(
-                modifier = Modifier.padding(start = 15.dp),
-                text = date,
-                style = MaterialTheme.typography.labelMedium
-            )
+            Row(modifier = Modifier
+                .fillMaxWidth(1f)
+                .background(color = Sky.copy(alpha = 0.5f))
+            ) {
+                Row(
+                    modifier = Modifier.weight(0.5f).fillMaxHeight(),
+                    horizontalArrangement = Arrangement.Start,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        modifier = Modifier.padding(start = 15.dp),
+                        text = date,
+                        style = MaterialTheme.typography.labelMedium
+                    )
+                }
+                Row(
+                    modifier = Modifier.weight(0.5f).fillMaxHeight(),
+                    horizontalArrangement = Arrangement.End,
+                    verticalAlignment = Alignment.CenterVertically
+                )  {
+                    Icon(
+                        modifier = Modifier.padding(end = 12.dp),
+                        painter = painterResource(id = R.drawable.download_icn),
+                        contentDescription = null)
+                }
+
+
+
+            }
+
         }
     }
 

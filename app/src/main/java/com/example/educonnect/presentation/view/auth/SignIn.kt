@@ -37,7 +37,7 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.educonnect.data.Constants.AUTH_URL
+import com.example.educonnect.data.Constants.SIGN_IN_URL
 import com.example.educonnect.navigation.NavigationScreenNames
 import com.example.educonnect.presentation.view.util.CustomTextField
 import com.example.educonnect.ui.theme.Sky
@@ -171,36 +171,40 @@ fun SignIn(navHostController: NavHostController){
                         colors = ButtonDefaults.buttonColors(containerColor = Color.White) ,
                         onClick = {
 
-                            val requestQueue = Volley.newRequestQueue(context)
 
-                            val request: StringRequest =
-                                object : StringRequest(Request.Method.PUT, AUTH_URL,
-                                    object : Response.Listener<String?> {
-                                    override fun onResponse(response: String?) {
-                                        Toast.makeText(context, "Success $response", Toast.LENGTH_SHORT).show()
-                                    }
-                                }, object : Response.ErrorListener {
-                                    override fun onErrorResponse(error: VolleyError?) {
-                                        Toast.makeText(context, "Failed ", Toast.LENGTH_SHORT).show()
-                                        Log.e("error", error.toString())
-                                    }
-                                }) {
-                                    override fun getParams(): Map<String, String> {
-                                        val params: MutableMap<String, String> = HashMap()
-                                        params["key_student_id"] = id
-                                        params["key_student_name"] = name
-                                        params["key_student_pass"] = password
-                                        return params
-                                    }
-                                }
 
-                            requestQueue.add(request)
+//                            val requestQueue = Volley.newRequestQueue(context)
+//
+//                            val request: StringRequest =
+//                                object : StringRequest(Request.Method.POST, SIGN_IN_URL,
+//                                    object : Response.Listener<String?> {
+//                                    override fun onResponse(response: String?) {
+//                                        Toast.makeText(context, "Success $response", Toast.LENGTH_SHORT).show()
+//                                    }
+//                                }, object : Response.ErrorListener {
+//                                    override fun onErrorResponse(error: VolleyError?) {
+//                                        Toast.makeText(context, "Failed ", Toast.LENGTH_SHORT).show()
+//                                        Log.e("error", error.toString())
+//                                    }
+//                                }) {
+//                                    override fun getParams(): Map<String, String> {
+//                                        val params: MutableMap<String, String> = HashMap()
+//                                        Log.i("id", id)
+//                                        Log.i("url", SIGN_IN_URL)
+//                                        params["student_id"] = id
+//                                        params["student_name"] = name
+//                                        params["student_pass"] = password
+//                                        return params
+//                                    }
+//                                }
+//
+//                            requestQueue.add(request)
 
-                            navHostController.navigate(NavigationScreenNames.MainScreens.route){
-                                popUpTo(route = NavigationScreenNames.Login.route){
-                                    inclusive = true
-                                }
-                            }
+//                            navHostController.navigate(NavigationScreenNames.MainScreens.route){
+//                                popUpTo(route = NavigationScreenNames.Login.route){
+//                                    inclusive = true
+//                                }
+//                            }
                         }
                     ) {
                         Text(

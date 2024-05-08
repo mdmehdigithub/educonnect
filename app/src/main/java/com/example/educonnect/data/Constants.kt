@@ -7,5 +7,8 @@ object Constants {
 
     private const val IP = "192.168.156.242"  // Change the ip to your own ip
     private const val BASE_URL = "https://${IP}/"
-    const val AUTH_URL = BASE_URL +"AuthAPI.php"
+    private const val AUTH_URL = "${BASE_URL}AuthAPI.php"
+    const val LOGIN_URL = "$AUTH_URL/login"
+    const val SIGN_IN_URL = "$AUTH_URL/signUp"
+
 }

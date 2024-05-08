@@ -165,6 +165,10 @@ fun Login(navHostController: NavHostController){
                                 .width(200.dp),
                             colors = ButtonDefaults.buttonColors(containerColor = Color.White) ,
                             onClick = {
+
+                                
+
+
                                 navHostController.navigate(NavigationScreenNames.MainScreens.route){
                                     popUpTo(route = NavigationScreenNames.Login.route){
                                         inclusive = true
@@ -192,6 +196,7 @@ fun Login(navHostController: NavHostController){
                                     TEACHER -> type = STUDENT
                                     STUDENT -> type = TEACHER
                                 }
+
                             }
                         ) {
                             Text(

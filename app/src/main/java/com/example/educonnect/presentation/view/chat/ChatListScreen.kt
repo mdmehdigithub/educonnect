@@ -24,11 +24,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.educonnect.R
+import com.example.educonnect.presentation.view.util.BottomBar
 import com.example.educonnect.ui.theme.Sky
 
 @Composable
 fun ChatListScreen(){
     Scaffold(
+        bottomBar = {
+                    BottomBar()
+        },
         topBar = {
             Row(
                 modifier = Modifier
@@ -88,7 +92,8 @@ fun ChatListScreen(){
                 ChatCard(
                     modifier = Modifier.padding(top = 10.dp, start = 10.dp, end = 10.dp),
                     name = it.name,
-                    numOfText = it.numText
+                    numOfText = it.numText,
+                    imageID = it.photo
                 )
             }
         }
@@ -96,21 +101,26 @@ fun ChatListScreen(){
 }
 
 data class ChatListScreenModel(
-    val photo: String,
+    val photo: Int,
     val name: String,
     val numText: Int
 )
 
 val listOfContact = listOf<ChatListScreenModel>(
     ChatListScreenModel(
-        photo = "Mehdi's Photo",
+        photo = R.drawable.person1,
         name = "Mehdi",
         numText = 20
     ),
     ChatListScreenModel(
-        photo = "Abrar's Photo",
+        photo = R.drawable.person2,
         name = "Abrar",
         numText = 68
+    ),
+    ChatListScreenModel(
+        photo = R.drawable.person3,
+        name = "Faisal",
+        numText = 13
     )
 )
 
