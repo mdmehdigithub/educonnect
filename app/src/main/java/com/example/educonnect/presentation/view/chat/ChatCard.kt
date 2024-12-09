@@ -1,6 +1,8 @@
 package com.example.educonnect.presentation.view.chat
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,26 +14,32 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.educonnect.R
 
 @Composable
 fun ChatCard(
     modifier: Modifier = Modifier,
     name: String = "Name of the person",
     numOfText: Int = 0,
+    imageID: Int = R.drawable.person2,
+    onClick: () -> Unit
 ){
     Row(
         modifier = modifier
+            .clickable(onClick = onClick)
             .fillMaxWidth(1f)
             .height(100.dp)
-            .background(color = Color.White, shape = RoundedCornerShape(16.dp) )
+            .background(color = Color.White, shape = RoundedCornerShape(16.dp))
     ) {
         Column(
             modifier = Modifier
@@ -40,16 +48,22 @@ fun ChatCard(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Row(
+            Card(
+                shape = CircleShape,
                 modifier = Modifier
+                    .width(80.dp)
+                    .height(80.dp)
+            ) {
+                Image(
+                    modifier = Modifier
                     .background(
                         color = Color.LightGray,
                         shape = CircleShape
                     )
                     .width(80.dp)
-                    .height(80.dp)
-            ) {
-
+                    .height(80.dp),
+                    painter = painterResource(id = imageID),
+                    contentDescription = null)
             }
         }
         Column(
@@ -103,5 +117,5 @@ fun ChatCard(
 @Preview
 @Composable
 private fun ChatCardPreview(){
-    ChatCard()
+    ChatCard(onClick = {})
 }

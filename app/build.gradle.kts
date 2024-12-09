@@ -4,6 +4,11 @@ plugins {
 
     // Kotlin Symbol Processor
     id("com.google.devtools.ksp")
+    // Hilt
+    id("com.google.dagger.hilt.android")
+    // Firebase
+    id("com.google.gms.google-services")
+
 }
 
 android {
@@ -83,6 +88,24 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
     implementation("androidx.hilt:hilt-work:1.2.0")
     implementation("androidx.work:work-runtime-ktx:2.9.0")
+
+    // GSON
+    implementation("com.google.code.gson:gson:2.10.1")
+
+    // Preference
+    implementation("androidx.preference:preference-ktx:1.2.1")
+
+    // Volley
+    implementation("com.android.volley:volley:1.2.1")
+
+    //Firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-firestore")
+
+    //Coil
+    implementation("io.coil-kt:coil-compose:2.6.0")
 
 
 }

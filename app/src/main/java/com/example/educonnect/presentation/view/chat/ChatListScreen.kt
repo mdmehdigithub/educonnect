@@ -23,11 +23,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.educonnect.R
+import com.example.educonnect.navigation.NavigationScreenNames
+import com.example.educonnect.presentation.viewmodel.notes.ChatViewModel
 import com.example.educonnect.ui.theme.Sky
 
 @Composable
-fun ChatListScreen(){
+fun ChatListScreen(
+    chatViewModel: ChatViewModel,
+    navHostController: NavHostController
+){
     Scaffold(
         topBar = {
             Row(
@@ -88,7 +95,12 @@ fun ChatListScreen(){
                 ChatCard(
                     modifier = Modifier.padding(top = 10.dp, start = 10.dp, end = 10.dp),
                     name = it.name,
-                    numOfText = it.numText
+                    numOfText = it.numText,
+                    imageID = it.photo,
+                    onClick = {
+                        chatViewModel.getInfo(it.photo, it.name)
+                        navHostController.navigate(NavigationScreenNames.Chat.route)
+                    }
                 )
             }
         }
@@ -96,26 +108,34 @@ fun ChatListScreen(){
 }
 
 data class ChatListScreenModel(
-    val photo: String,
-    val name: String,
-    val numText: Int
+    val photo: Int = 0,
+    val name: String = "",
+    val numText: Int = 0
 )
 
 val listOfContact = listOf<ChatListScreenModel>(
     ChatListScreenModel(
-        photo = "Mehdi's Photo",
+        photo = R.drawable.person1,
         name = "Mehdi",
         numText = 20
     ),
     ChatListScreenModel(
-        photo = "Abrar's Photo",
+        photo = R.drawable.person2,
         name = "Abrar",
         numText = 68
+    ),
+    ChatListScreenModel(
+        photo = R.drawable.person3,
+        name = "Faisal",
+        numText = 13
     )
 )
 
 @Preview
 @Composable
 fun ChatListScreenPreview(){
-    ChatListScreen()
+    ChatListScreen(
+        chatViewModel = ChatViewModel(),
+        navHostController = rememberNavController()
+    )
 }

@@ -1,5 +1,8 @@
 package com.example.educonnect.presentation.view.auth
 
+import android.util.Log
+import android.widget.Toast
+import androidx.annotation.Nullable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,11 +26,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.VolleyError
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import com.example.educonnect.data.Constants.SIGN_IN_URL
 import com.example.educonnect.navigation.NavigationScreenNames
 import com.example.educonnect.presentation.view.util.CustomTextField
 import com.example.educonnect.ui.theme.Sky
@@ -35,6 +45,7 @@ import com.example.educonnect.ui.theme.Sky
 @Composable
 fun SignIn(navHostController: NavHostController){
 
+    val context = LocalContext.current
     var name by remember { mutableStateOf("") }
     var id by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -66,7 +77,7 @@ fun SignIn(navHostController: NavHostController){
             }
         }
     ) {
-            it ->
+        it ->
         Column(
             modifier = Modifier
                 .padding(it)
@@ -159,11 +170,41 @@ fun SignIn(navHostController: NavHostController){
                             .width(200.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = Color.White) ,
                         onClick = {
-                            navHostController.navigate(NavigationScreenNames.MainScreens.route){
-                                popUpTo(route = NavigationScreenNames.Login.route){
-                                    inclusive = true
-                                }
-                            }
+
+
+
+//                            val requestQueue = Volley.newRequestQueue(context)
+//
+//                            val request: StringRequest =
+//                                object : StringRequest(Request.Method.POST, SIGN_IN_URL,
+//                                    object : Response.Listener<String?> {
+//                                    override fun onResponse(response: String?) {
+//                                        Toast.makeText(context, "Success $response", Toast.LENGTH_SHORT).show()
+//                                    }
+//                                }, object : Response.ErrorListener {
+//                                    override fun onErrorResponse(error: VolleyError?) {
+//                                        Toast.makeText(context, "Failed ", Toast.LENGTH_SHORT).show()
+//                                        Log.e("error", error.toString())
+//                                    }
+//                                }) {
+//                                    override fun getParams(): Map<String, String> {
+//                                        val params: MutableMap<String, String> = HashMap()
+//                                        Log.i("id", id)
+//                                        Log.i("url", SIGN_IN_URL)
+//                                        params["student_id"] = id
+//                                        params["student_name"] = name
+//                                        params["student_pass"] = password
+//                                        return params
+//                                    }
+//                                }
+//
+//                            requestQueue.add(request)
+
+//                            navHostController.navigate(NavigationScreenNames.MainScreens.route){
+//                                popUpTo(route = NavigationScreenNames.Login.route){
+//                                    inclusive = true
+//                                }
+//                            }
                         }
                     ) {
                         Text(

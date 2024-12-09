@@ -1,5 +1,6 @@
 package com.example.educonnect.presentation.view.chat
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,12 +22,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.educonnect.presentation.view.util.TopBar
 import com.example.educonnect.ui.theme.Sky
 
 @Composable
-fun ChatScreen(){
+fun ChatScreen(
+    chatListScreenModel: ChatListScreenModel
+){
     Scaffold(
         topBar = {
             Row(
@@ -36,32 +41,33 @@ fun ChatScreen(){
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Column(
+                Card(
+                    shape = CircleShape,
                     modifier = Modifier
-                        .weight(0.05f),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
+                        .width(60.dp)
+                        .height(60.dp)
                 ) {
-                    Row(
+                    Image(
                         modifier = Modifier
                             .background(
                                 color = Color.LightGray,
                                 shape = CircleShape
                             )
                             .width(60.dp)
-                            .height(60.dp)
-                    ) {
-
-                    }
+                            .height(60.dp),
+                        painter = painterResource(id = chatListScreenModel.photo),
+                        contentDescription = null)
                 }
+
                 Column(
                     modifier = Modifier
-                        .weight(0.2f),
+                        .weight(0.2f)
+                        .padding(start = 10.dp),
                     verticalArrangement = Arrangement.Center
                 ) {
                     Row {
                         Text(
-                            text = "Name of the person",
+                            text = chatListScreenModel.name,
                             modifier = Modifier.fillMaxWidth(1f),
                             style = MaterialTheme.typography.titleMedium
                         )
@@ -168,5 +174,5 @@ private fun ChatPreview(){
 @Preview
 @Composable
 private fun ChatScreenPreview(){
-    ChatScreen()
+    ChatScreen(ChatListScreenModel())
 }

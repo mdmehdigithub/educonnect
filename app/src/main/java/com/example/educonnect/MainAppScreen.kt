@@ -11,11 +11,14 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.educonnect.navigation.AppScreenNavigation
+import com.example.educonnect.presentation.view.util.BottomBar
 
 @Composable
 fun MainAppScreen(navHostController: NavHostController = rememberNavController()){
     Scaffold (
-        bottomBar = {  }
+        bottomBar = {
+            BottomBar(navHostController)
+        }
     )
     { innerPadding ->
         Column(

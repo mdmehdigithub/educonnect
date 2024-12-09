@@ -29,12 +29,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.educonnect.data.Constants.STUDENT
+import com.example.educonnect.data.Constants.TEACHER
 import com.example.educonnect.navigation.NavigationScreenNames
 import com.example.educonnect.presentation.view.util.CustomTextField
 import com.example.educonnect.ui.theme.Sky
 
-private const val STUDENT = "Student"
-private const val TEACHER = "Teacher"
+
 @Composable
 fun Login(navHostController: NavHostController){
     var type by remember { mutableStateOf(STUDENT) }
@@ -164,6 +165,8 @@ fun Login(navHostController: NavHostController){
                                 .width(200.dp),
                             colors = ButtonDefaults.buttonColors(containerColor = Color.White) ,
                             onClick = {
+
+
                                 navHostController.navigate(NavigationScreenNames.MainScreens.route){
                                     popUpTo(route = NavigationScreenNames.Login.route){
                                         inclusive = true
@@ -191,6 +194,7 @@ fun Login(navHostController: NavHostController){
                                     TEACHER -> type = STUDENT
                                     STUDENT -> type = TEACHER
                                 }
+
                             }
                         ) {
                             Text(
